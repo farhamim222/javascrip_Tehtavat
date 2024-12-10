@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Articles with Modal</title>
+    <style>
+        .card {
+            border: 1px solid #ccc;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .card img {
+            max-width: 100%;
+            height: auto;
+        }
+        dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: none;
+            padding: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            background: white;
+            width: 80%;
+            max-width: 600px;
+        }
+        dialog img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        dialog span {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dynamic Article Cards</h1>
+
+    <!-- The section where articles will be dynamically added -->
+    <section id="articleSection">
+        <!-- Articles will be dynamically added here by JavaScript -->
+    </section>
+
+    <!-- The modal -->
+    <dialog id="imageModal">
+        <span id="closeModal" style="cursor: pointer;">&#x2715;</span>
+        <img id="modalImage" alt="">
+    </dialog>
+
+    <!-- Link to the JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
