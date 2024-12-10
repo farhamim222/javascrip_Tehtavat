@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Program</title>
+    <script>
+        'use strict';
+
+        // Function to handle voting
+        function startVoting() {
+            // Step 1: Ask for the number of candidates
+            const numCandidates = parseInt(prompt("How many candidates are there?"));
+            const candidates = [];
+
+            // Step 2: Ask for the names of the candidates and initialize votes
+            for (let i = 0; i < numCandidates; i++) {
+                const candidateName = prompt(`Enter the name for candidate ${i + 1}:`);
+                candidates.push({
+                    name: candidateName,
+                    votes: 0,
+                });
+            }
+
+            // Step 3: Ask for the number of voters
+            const numVoters = parseInt(prompt("How many voters are there?"));
+
+            // Step 4: Ask each voter who they will vote for
+            for (let i = 0; i < numVoters; i++) {
+                const vote = prompt(`Voter ${i + 1}, who do you want to vote for? (Enter name or leave empty for no vote)`);
+
+                // Check if the vote is not empty and is a valid candidate name
+                if (vote) {
+                    const candidate = candidates.find(c => c.name.toLowerCase() === vote.toLowerCase());
+                    if (candidate) {
+                        candidate.votes += 1;
+                    } else {
+                        alert(`Invalid candidate name: ${vote}`);
+                    }
+                }
+                // Empty vote will be ignored, no changes to vote count
+            }
+
+            // Step 5: Sort candidates by votes
+            candidates.sort((a, b) => b.votes - a.votes);  // Sorting in descending order of votes
+
+            // Step 6: Announce the winner and print the results
+            const winner = candidates[0];
+            alert(`The winner is ${winner.name} with ${winner.votes} votes.`);
+
+            // Print results
+            console.log("Results:");
+            candidates.forEach(candidate => {
+                console.log(`${candidate.name}: ${candidate.votes} votes`);
+            });
+        }
+
+        // Call the function when the page loads
+        window.onload = startVoting;
+    </script>
+</head>
+<body>
+    <h1>Voting Program</h1>
+    <p>Open your console (F12 or Ctrl+Shift+I) to see the voting results.</p>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"tehtävät2.js"</title>
+    <script>
+        'use strict';
+
+        function getParticipants() {
+
+            let numParticipants = prompt("Enter the number of participants:");
+
+
+            numParticipants = parseInt(numParticipants);
+            if (isNaN(numParticipants) || numParticipants <= 0) {
+                alert("Please enter a valid number of participants.");
+                return;
+            }
+
+            let participants = [];
+
+
+            for (let i = 0; i < numParticipants; i++) {
+                let name = prompt("Enter the name of participant " + (i + 1) + ":");
+                participants.push(name);
+            }
+
+
+            participants.sort();
+
+
+            let resultHtml = "<ol>";
+            for (let i = 0; i < participants.length; i++) {
+                resultHtml += "<li>" + participants[i] + "</li>";
+            }
+            resultHtml += "</ol>";
+
+
+            document.getElementById("result").innerHTML = resultHtml;
+        }
+    </script>
+</head>
+<body>
+    <h2>Enter Participants' Names</h2>
+    <button onclick="getParticipants()">Start</button>
+
+    <div id="result"></div>
+</body>
+</html>
+
+
+

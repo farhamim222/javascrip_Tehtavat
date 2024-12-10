@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"tehtävä3.js"</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter the Names of Six Dogs</h1>
+    <form id="dogForm">
+        <label for="dog1">Dog 1:</label>
+        <input type="text" id="dog1" required><br><br>
+        <label for="dog2">Dog 2:</label>
+        <input type="text" id="dog2" required><br><br>
+        <label for="dog3">Dog 3:</label>
+        <input type="text" id="dog3" required><br><br>
+        <label for="dog4">Dog 4:</label>
+        <input type="text" id="dog4" required><br><br>
+        <label for="dog5">Dog 5:</label>
+        <input type="text" id="dog5" required><br><br>
+        <label for="dog6">Dog 6:</label>
+        <input type="text" id="dog6" required><br><br>
+        <button type="button" onclick="generateList()">Submit</button>
+    </form>
+
+    <h2>Dog Names in Reverse Alphabetical Order</h2>
+    <div id="output"></div>
+
+    <script>
+        function generateList() {
+
+            const dogNames = [
+                document.getElementById('dog1').value,
+                document.getElementById('dog2').value,
+                document.getElementById('dog3').value,
+                document.getElementById('dog4').value,
+                document.getElementById('dog5').value,
+                document.getElementById('dog6').value
+            ];
+
+
+            dogNames.sort().reverse();
+
+
+            let html = "<ul>";
+            for (const name of dogNames) {
+                html += `<li>${name}</li>`;
+            }
+            html += "</ul>";
+
+
+            document.getElementById('output').innerHTML = html;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Even Numbers</title>
+    <script>
+        'use strict';  // Enforce strict mode to catch common errors
+
+        // Function to filter even numbers from the input array
+        function even(array) {
+            let evenArray = [];  // Create a new array to store even numbers
+
+            // Loop through the original array and check for even numbers
+            for (let i = 0; i < array.length; i++) {
+                if (array[i] % 2 === 0) {  // If the number is even
+                    evenArray.push(array[i]);  // Add it to the evenArray
+                }
+            }
+
+            return evenArray;  // Return the array containing even numbers
+        }
+
+        // Main function to call even() and print results to the console
+        function main() {
+            // Hardcoded array of numbers
+            const originalArray = [2, 7, 4];
+
+            // Call the even() function and store the result in a new array
+            const evenNumbersArray = even(originalArray);
+
+            // Print both the original array and the new array to the console
+            console.log("Original Array:", originalArray);
+            console.log("Even Numbers Array:", evenNumbersArray);
+        }
+
+        // Ensure the main function is called once the page is fully loaded
+        window.onload = main;  // Use window.onload to call main() when the page is loaded
+    </script>
+</head>
+<body>
+    <h1>Check the Console for the Result</h1>
+    <p>The script filters even numbers from a hardcoded array and prints both the original and the new array with even numbers to the console.</p>
+</body>
+</html>
