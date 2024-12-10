@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TV Series Search</title>
+</head>
+<body>
+
+  <h1>TV Series Search</h1>
+
+  <!-- Search Form -->
+  <form id="searchForm">
+    <input id="query" name="q" type="text" placeholder="Enter TV series name" required>
+    <input type="submit" value="Search">
+  </form>
+
+  <h2>Search Results:</h2>
+  <pre id="results"></pre>
+
+  <script>
+    // When the form is submitted, execute the search
+    document.getElementById("searchForm").addEventListener("submit", function (event) {
+      event.preventDefault();  // Prevent the form from submitting normally
+
+      const query = document.getElementById("query").value;  // Get the value from the input field
+
+      // Check if query is not empty
+      if (query) {
+        // Fetch data from TVMaze API using the query entered by the user
+        fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
+          .then(response => response.json())  // Parse the JSON response
+          .then(data => {
+            // Print the results to the console
+            console.log(data);
+
+            // Optionally: You can display the search result on the page as well
+            const resultsContainer = document.getElementById("results");
+            resultsContainer.textContent = JSON.stringify(data, null, 2);  // Pretty print JSON
+          })
+          .catch(error => {
+            console.error("Error fetching data:", error);  // Handle any errors
+          });
+      } else {
+        alert("Please enter a TV series name.");
+      }
+    });
+  </script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route Finder</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        #map {
+            height: 500px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #route-info {
+            margin-top: 20px;
+        }
+
+        input[type="text"], button {
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Your Route</h1>
+    <form id="route-form">
+        <label for="address">Enter Your Address:</label>
+        <input type="text" id="address" placeholder="Type your address" required />
+        <button type="submit">Find Route</button>
+    </form>
+
+    <div id="route-info">
+        <p id="start-time"></p>
+        <p id="end-time"></p>
+        <p id="error-message" class="error"></p>
+    </div>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

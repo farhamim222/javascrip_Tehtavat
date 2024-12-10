@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TV Series Search</title>
+  <style>
+    article {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    h2 {
+      font-size: 24px;
+      color: #333;
+    }
+    img {
+      max-width: 200px;
+      height: auto;
+      margin-right: 15px;
+    }
+    .show-details {
+      display: flex;
+      align-items: center;
+    }
+    .show-summary {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>TV Series Search</h1>
+
+  <!-- Search Form -->
+  <form id="searchForm">
+    <input id="query" name="q" type="text" placeholder="Enter TV series name" required>
+    <input type="submit" value="Search">
+  </form>
+
+  <h2>Search Results:</h2>
+
+  <!-- Results container -->
+  <div id="results"></div>
+
+  <script>
+    // Add an event listener to the form submission
+    document.getElementById("searchForm").addEventListener("submit", function (event) {
+      event.preventDefault();  // Prevent the form from submitting and reloading the page
+
+      // Get the value entered into the input field
+      const query = document.getElementById("query").value;
+
+      // Check if the query is not empty
+      if (query) {
+        // Fetch the data from the TVMaze API using the entered query
+        fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
+          .then(response => response.json())  // Parse the response to JSON
+          .then(data => {
+            // Clear the previous search results
+            const resultsContainer = document.getElementById("results");
+            resultsContainer.innerHTML = '';  // Clear any existing results
+
+            // Loop through the search results and create HTML for each show
+            data.forEach(tvShow => {
+              // Create a new <article> element to contain the show details
+              const article = document.createElement("article");
+
+              // Create a <div> element to hold the show image, name, and URL
+              const showDetails = document.createElement("div");
+              showDetails.classList.add("show-details");
+
+              // Create the <img> element for the show's image
+              const img = document.createElement("img");
+              img.src = tvShow.show.image?.medium || ''; // Optional chaining for missing images
+              img.alt = tvShow.show.name || 'No image available'; // Fallback text for missing images
+
+              // Create the <h2> element for the show's name
+              const h2 = document.createElement("h2");
+              h2.textContent = tvShow.show.name;
+
+              // Create the <a> element for the show's link (with target="_blank")
+              const link = document.createElement("a");
+              link.href = tvShow.show.url;
+              link.textContent = 'More details';
+              link.target = "_blank"; // Open link in new tab
+
+              // Append the <img>, <h2>, and <a> elements to the showDetails container
+              showDetails.appendChild(img);
+              showDetails.appendChild(h2);
+              showDetails.appendChild(link);
+
+              // Create the <div> element for the summary
+              const showSummary = document.createElement("div");
+              showSummary.classList.add("show-summary");
+              showSummary.innerHTML = tvShow.show.summary || 'No summary available';  // Fallback for missing summary
+
+              // Append the show details and summary to the <article> element
+              article.appendChild(showDetails);
+              article.appendChild(showSummary);
+
+              // Append the <article> to the results container
+              resultsContainer.appendChild(article);
+            });
+          })
+          .catch(error => {
+            // Catch and log any errors
+            console.error("Error fetching data:", error);
+          });
+      } else {
+        // If no input is provided, alert the user
+        alert("Please enter a TV series name.");
+      }
+    });
+  </script>
+
+</body>
+</html>
